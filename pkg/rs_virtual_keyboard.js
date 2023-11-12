@@ -73,15 +73,6 @@ function passStringToWasm0(arg, malloc, realloc) {
     return ptr;
 }
 /**
-* @param {string} name
-*/
-export function greet(name) {
-    const ptr0 = passStringToWasm0(name, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len0 = WASM_VECTOR_LEN;
-    wasm.greet(ptr0, len0);
-}
-
-/**
 */
 export class Encoding {
 
@@ -100,10 +91,20 @@ export class Encoding {
     * @param {string} nom_encodage
     * @returns {number}
     */
-    static parcours(nom_encodage) {
+    static get_encoding_starting_character(nom_encodage) {
         const ptr0 = passStringToWasm0(nom_encodage, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.encoding_parcours(ptr0, len0);
+        const ret = wasm.encoding_get_encoding_starting_character(ptr0, len0);
+        return ret >>> 0;
+    }
+    /**
+    * @param {string} nom_encodage
+    * @returns {number}
+    */
+    static get_encoding_ending_character(nom_encodage) {
+        const ptr0 = passStringToWasm0(nom_encodage, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.encoding_get_encoding_ending_character(ptr0, len0);
         return ret >>> 0;
     }
 }
@@ -142,9 +143,6 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbg_alert_df98f751e7225f53 = function(arg0, arg1) {
-        alert(getStringFromWasm0(arg0, arg1));
-    };
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };

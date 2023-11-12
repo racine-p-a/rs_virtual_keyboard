@@ -18,7 +18,8 @@ init().then(() => {
         const datum = new Encoding(13);
         console.log(datum.get_start());
         console.log(datum.get_end());*/
-        console.log(Encoding.parcours('latin'));
+        console.log(Encoding.get_encoding_starting_character('latin'));
+        console.log(Encoding.get_encoding_ending_character('latin'));
     });
 });
 
