@@ -81,6 +81,61 @@ export function greet(name) {
     wasm.greet(ptr0, len0);
 }
 
+/**
+*/
+export class Datum {
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+
+        return ptr;
+    }
+
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_datum_free(ptr);
+    }
+}
+/**
+*/
+export class Titi {
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+
+        return ptr;
+    }
+
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_titi_free(ptr);
+    }
+    /**
+    * @param {number} val
+    */
+    constructor(val) {
+        const ret = wasm.titi_new(val);
+        this.__wbg_ptr = ret >>> 0;
+        return this;
+    }
+    /**
+    * @returns {number}
+    */
+    get_start() {
+        const ret = wasm.titi_get_start(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+    * @returns {number}
+    */
+    get_end() {
+        const ret = wasm.titi_get_end(this.__wbg_ptr);
+        return ret;
+    }
+}
+
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
         if (typeof WebAssembly.instantiateStreaming === 'function') {
@@ -117,6 +172,9 @@ function __wbg_get_imports() {
     imports.wbg = {};
     imports.wbg.__wbg_alert_df98f751e7225f53 = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbindgen_throw = function(arg0, arg1) {
+        throw new Error(getStringFromWasm0(arg0, arg1));
     };
 
     return imports;
