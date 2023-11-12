@@ -1,4 +1,4 @@
-import init, {Titi} from "./pkg/rs_virtual_keyboard.js";
+import init, {Encoding} from "./pkg/rs_virtual_keyboard.js";
 
 // Fonctionne
 /*
@@ -14,9 +14,11 @@ init().then(() => {
         //greet(document.getElementById('charTables').value);
         //const universe = encodings('titi');
         //console.log(universe);
-        const datum = new Titi(14);
+        /*
+        const datum = new Encoding(13);
         console.log(datum.get_start());
-        console.log(datum.get_end());
+        console.log(datum.get_end());*/
+        console.log(Encoding.parcours('latin'));
     });
 });
 

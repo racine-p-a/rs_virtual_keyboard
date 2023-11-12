@@ -83,7 +83,7 @@ export function greet(name) {
 
 /**
 */
-export class Datum {
+export class Encoding {
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
@@ -94,45 +94,17 @@ export class Datum {
 
     free() {
         const ptr = this.__destroy_into_raw();
-        wasm.__wbg_datum_free(ptr);
-    }
-}
-/**
-*/
-export class Titi {
-
-    __destroy_into_raw() {
-        const ptr = this.__wbg_ptr;
-        this.__wbg_ptr = 0;
-
-        return ptr;
-    }
-
-    free() {
-        const ptr = this.__destroy_into_raw();
-        wasm.__wbg_titi_free(ptr);
+        wasm.__wbg_encoding_free(ptr);
     }
     /**
-    * @param {number} val
-    */
-    constructor(val) {
-        const ret = wasm.titi_new(val);
-        this.__wbg_ptr = ret >>> 0;
-        return this;
-    }
-    /**
+    * @param {string} nom_encodage
     * @returns {number}
     */
-    get_start() {
-        const ret = wasm.titi_get_start(this.__wbg_ptr);
-        return ret;
-    }
-    /**
-    * @returns {number}
-    */
-    get_end() {
-        const ret = wasm.titi_get_end(this.__wbg_ptr);
-        return ret;
+    static parcours(nom_encodage) {
+        const ptr0 = passStringToWasm0(nom_encodage, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.encoding_parcours(ptr0, len0);
+        return ret >>> 0;
     }
 }
 
